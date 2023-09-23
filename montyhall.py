@@ -28,8 +28,8 @@ for i in range(1,2000):
 plt.plot(win_prob_stay, label = 'prob of win by staying')
 plt.plot(win_prob_switch, label = 'prob of win by switching')
 plt.legend()
-print("prob of win by switching",win_prob_switch[-1])        
-print("prob of win by staying",win_prob_stay[-1]) 
+print("prob of win by switching", win_prob_switch[-1])        
+print("prob of win by staying", win_prob_stay[-1]) 
 plt.show()  
     
 
