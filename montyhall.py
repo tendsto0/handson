@@ -8,7 +8,7 @@ win_prob_stay = []
 door = [0,1,2]
 stay_win = 0
 switch_win = 0
-for i in range(1,2000):
+for i in range(1,1000):
     
     
     rnd.shuffle(prize)
