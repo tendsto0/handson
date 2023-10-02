@@ -7,7 +7,7 @@ nitter = 10000                  #monte carlo steps
 T = 2                           #temp in units if j and kb
 j_ising = 1                     #j in hamiltonian of ising model
 E , M = 0, 0
-l = 20                          #lattice length
+l = 50                          #lattice length
 spin = np.ones((l, l))          #2d lattice
 
 #randomize the lattice
@@ -39,7 +39,7 @@ print(f"initial    energy = {E}    magnetization = {mag}    M = {M}")
 
 #evolving the sytem to equilibrium   
 magnetization = []
-energy = []
+#energy = []
 for  time in range(nitter):
     for itter1 in range(l):
          for itter2 in range(l):
@@ -73,10 +73,10 @@ for  time in range(nitter):
                     spin[i][j] = -spin[i][j]
     
     
-            magnetization.append(M/(400)) 
-            #energy.append(E) 
+    magnetization.append(M/(l**2)) 
+    #energy.append(E) 
     
-plt.plot(magnetization, label= "mag")   
+plt.plot(magnetization)   
 #print(magnetization)
 #plt.legend()
 plt.show()

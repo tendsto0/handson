@@ -2,8 +2,8 @@ import numpy as np
 import random as rnd
 import matplotlib.pyplot as plt
 
-neqil = 10000
-nitter = 110000                  #monte carlo steps
+neqil = 2500
+nitter = 5000                   #monte carlo steps
 #T = 2                           #temp in units if j and kb
 j_ising = 1                     #j in hamiltonian of ising model
 E , M = 0, 0
@@ -40,11 +40,12 @@ print(f"initial    energy = {E}    magnetization = {mag}    M = {M}")
 #evolving the sytem to equilibrium   
 magnetization = []
 energy = []
+cvlist = []
 Xlist = []
 Temperature = []
-for temp in range(15, 30):
+for temp in range(150, 301):
     
-    T = temp/10
+    T = temp/100
     avg_e, avg_m = 0, 0
     avg_e_n, avg_m_n = 0, 0
     avg_e_2, avg_m_2 = 0, 0
@@ -97,20 +98,34 @@ for temp in range(15, 30):
     avg_m_n = avg_m_n/(nitter - neqil)
     avg_e_2 = avg_e_2/(nitter - neqil)
     X = (avg_m_2 - avg_m_n**2)/T
-    #cv = (avg_e_2 - avg_e_n**2)/T**2
+    cv = (avg_e_2 - avg_e_n**2)/T**2
     Xlist.append(X)
+    cvlist.append(cv)
+    energy.append(avg_e)
+    magnetization.append(avg_m)
     Temperature.append(T)
-    
-    
-plt.scatter(Temperature , Xlist)
+     
+fig, ax = plt.subplots(nrows = 2, ncols = 2)   
+
+ax[0, 0].scatter(Temperature, energy, c='red' )
+ax[0, 1].scatter(Temperature, cvlist, c='red')
+ax[1, 0].scatter(Temperature, magnetization, c='blue')
+ax[1, 1].scatter(Temperature, Xlist, c='blue')
+
+ax[0, 0].set_ylabel('Energy per spin <E/N>')
+ax[0, 1].set_ylabel('$C_v$')
+ax[1, 0].set_ylabel('magnetization <M/N>')
+ax[1, 1].set_ylabel('$\chi$')
+
+ax[0, 0].set_xlabel('Temperature')
+ax[0, 1].set_xlabel('Temperature')
+ax[1, 0].set_xlabel('Temperature')
+ax[1, 1].set_xlabel('Temperature')
+
+
+ax[0, 0].set_title('Energy per spin vs temp.')
+ax[0, 1].set_title('$C_v$ vs temp.')
+ax[1, 0].set_title('magnetization per spin vs temp.')
+ax[1, 1].set_title('Susceptibity vs temp.')
+ 
 plt.show()
-            
-        
-        
-                
-       
-                
-            
-            
-            
-    
