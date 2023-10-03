@@ -19,8 +19,8 @@ for i in range (len(ar)):
 # different values of x
 integral = 0.0
   
-# function to calculate the sin of a particular
-# value of x
+# function to calculate the sin cube of a particular value of x
+
 def f(x):
     return (np.sin(x))**3
   
@@ -33,4 +33,4 @@ for i in ar:
 ans = (b-a)/float(N)*integral
   
 # prints the solution
-print ("The value calculated by monte carlo integration is {}.".format(ans))
+print (f"The value calculated by monte carlo integration is {ans}.")

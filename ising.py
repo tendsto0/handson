@@ -43,7 +43,7 @@ energy = []
 cvlist = []
 Xlist = []
 Temperature = []
-for temp in range(150, 301):
+for temp in range(150, 301, 5):
     
     T = temp/100
     avg_e, avg_m = 0, 0
@@ -83,26 +83,24 @@ for temp in range(150, 301):
                     else:
                         spin[i][j] = -spin[i][j]
         if(time >= neqil):
-            mag = abs(M)/l*l
+            mag = abs(M)/l**2
             avg_m += mag
-            avg_e += E/l*l
+            avg_e += E/l**2
             avg_m_2 += M**2
             avg_e_2 += E**2
             avg_m_n += M
             avg_e_n += E
             
-    avg_m = avg_m/(nitter - neqil)
-    avg_e = avg_e/(nitter - neqil)
-    avg_e_2 = avg_m_2/(nitter - neqil)
+    avg_e_2 = avg_e_2/(nitter - neqil)
     avg_m_2 = avg_m_2/(nitter - neqil)
     avg_m_n = avg_m_n/(nitter - neqil)
-    avg_e_2 = avg_e_2/(nitter - neqil)
+    avg_e_n = avg_e_n/(nitter - neqil)
     X = (avg_m_2 - avg_m_n**2)/T
     cv = (avg_e_2 - avg_e_n**2)/T**2
     Xlist.append(X)
     cvlist.append(cv)
-    energy.append(avg_e)
-    magnetization.append(avg_m)
+    energy.append(avg_e/(nitter - neqil))
+    magnetization.append(avg_m/(nitter - neqil))
     Temperature.append(T)
      
 fig, ax = plt.subplots(nrows = 2, ncols = 2)   
